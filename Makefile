@@ -13,56 +13,37 @@ CFLAGS				=		-Wall -Werror -MMD -MP -g3
 SRCS				=			$(addprefix $(SRCS_DIR), $(SRC_ACC))
 
 SRCS_DIR			=			srcs/
-ALGO_DIR			=			algorithm/
-OPE_DIR				=			operations/
-PARSING_DIR			=			parsing/
-SORT_DIR			=			sort/
-STACK_DIR			=			stack/
-UTILS_DIR			=			utils/
-
-ALGO_SRCS			=			radix				\
-
-OPE_SRCS			=			push				\
-								reverse_rotate		\
-								rotate				\
-								swap
-
-PARSING_SRCS		=			imput_parse			\
-								parsing_utils
-
-SORT_SRCS			=			radix_sort			\
-								sort_four_to_nine	\
-								sort_stacks			\
-								sort_three
-
-STACK_SRCS			=			stack_init			\
-								stack_utils
-
-UTILS_SRCS			=			error_handling		\
-								error_utils
 
 MAIN_SRCS			=			main
 
-SRC_ACC				+=			$(addprefix $(ALGO_DIR), $(addsuffix .c, $(ALGO_SRCS)))
-SRC_ACC				+=			$(addprefix $(OPE_DIR), $(addsuffix .c, $(OPE_SRCS)))
-SRC_ACC				+=			$(addprefix $(PARSING_DIR), $(addsuffix .c, $(PARSING_SRCS)))
-SRC_ACC				+=			$(addprefix $(SORT_DIR), $(addsuffix .c, $(SORT_SRCS)))
-SRC_ACC				+=			$(addprefix $(STACK_DIR), $(addsuffix .c, $(STACK_SRCS)))
-SRC_ACC				+=			$(addprefix $(UTILS_DIR), $(addsuffix .c, $(UTILS_SRCS)))
 SRC_ACC				+=			$(addsuffix .c, $(MAIN_SRCS))
+
 
 OBJ			=			$(patsubst $(SRCS_DIR)%.c,$(OBJ_DIR)%.o,$(SRCS))
 
 DEP			=			$(patsubst $(SRCS_DIR)%.c,$(OBJ_DIR)%.d,$(SRCS))
 
+MLX			:=	libmlx.a
+
+MLX_D		:=	includes/minilibx-linux/
+
+MLX_F		:=	-L$(MLX_D) -lmlx -lXext -lX11 -lm -lz
+
+MLX_H		:=	$(MLX_D)mlx.h
+
+MLX_A		:=	$(addprefix $(MLX_D), $(MLX))
+
 all:					$(NAME)
 
-$(NAME):				$(OBJ) $(LIBFT)
-							$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $@
+$(NAME):				$(OBJ) $(LIBFT) $(MLX)
+							$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX_F) -o $@
 
-$(OBJ_DIR)%.o: $(SRCS_DIR)%.c
+$(OBJ_DIR)%.o: $(SRCS_DIR)%.c Makefile
 						@mkdir -p $(dir $@)
 						$(CC) $(CFLAGS) -c $< -o $@
+
+$(MLX): FORCE
+	@$(MAKE) -C $(MLX_D)
 
 $(LIBFT): FORCE
 	$(MAKE) -C includes/libft
@@ -70,11 +51,13 @@ $(LIBFT): FORCE
 clean:
 						make clean -C includes/libft
 						@rm -rf $(OBJ_DIR)
+						@rm -rf $(MLX_D)obj
 						@echo "Deleting $(OBJ_DIR)"
 
 
 fclean:					clean
 							make fclean -C includes/libft
+							make clean -C $(MLX_D)
 							@rm -rf $(NAME)
 							@echo "Deleting $(NAME)"
 
