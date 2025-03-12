@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fract-ol.h"
+#include "../includes/fractol.h"
 
 void	draw_julia(t_fractal *fractal)
 {
 	fractal->x = 0;
-	fractal-> = 0;
+	fractal->y = 0;
 	while (fractal->x < SIZE)
 	{
 		while (fractal->y < SIZE)
@@ -40,13 +40,15 @@ void	calculate_julia(t_fractal *fractal)
 	while (++i < fractal-> max_iter)
 	{
 		tmp = fractal->zx;
-		fractal->zx = fractal->zx * fractal->zx - fractal->zy * fractal->zy + fractal->cx;
+		fractal->zx = fractal->zx * fractal->zx \
+						- fractal->zy * fractal->zy + fractal->cx;
 		fractal->zy = 2 * fractal->zy * tmp + fractal->cy;
-		if (fractal->zx * fractal->zx + fractal->zy * fractal->zy >= __DBL_MAX__)
+		if (fractal->zx * fractal->zx + fractal->zy * fractal->zy >= 4.0)
 			break ;
 	}
 	if (i == fractal->max_iter)
 		put_color_to_pixel(fractal, fractal->x, fractal->y, 0x000000);
 	else
-		put_color_to_pixel(fractal, fractal->x, fractal->y, (fractal->color *(i % 255)));
+		put_color_to_pixel(fractal, fractal->x, fractal->y, \
+									(fractal->color *(i % 255)));
 }

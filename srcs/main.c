@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fract-ol.h"
+#include "../includes/fractol.h"
 
 int	draw_fractal(t_fractal *fractal, char *query)
 {
-	if (ft_strncmp(query, "mandelbrot", 11) == 0);
+	if (ft_strncmp(query, "mandelbrot", 11) == 0)
 		draw_mandelbrot(fractal);
-	else if (ft_strncmp(query, "julia", 6) == 0);
+	else if (ft_strncmp(query, "julia", 6) == 0)
 	{
 		if (!fractal->cx && !fractal->cy)
 		{
@@ -25,18 +25,19 @@ int	draw_fractal(t_fractal *fractal, char *query)
 		}
 		draw_julia(fractal);
 	}
-	else if (ft_strncmp(query, "burningship", 12) == 0);
+	else if (ft_strncmp(query, "burningship", 12) == 0)
 		draw_burningship(fractal);
 	else
 	{
 		ft_putendl_fd("Available fractals: mandelbrot, julia, burningship", 1);
 		exit_fractal(fractal);
 	}
-	mlx_put_img_to_window(fractal->mlx, fractal->window, fractal->image, 0, 0);
+	mlx_put_image_to_window(fractal->mlx, fractal->window, \
+							fractal->image, 0, 0);
 	return (0);
 }
 
-int main (int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_fractal	*fractal;
 

@@ -10,14 +10,40 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fract-ol.h"
+#include "../includes/fractol.h"
 
-void	exit_fractal(t_fractal *fractal)
+void	change_max_iter(t_fractal *fractal, int key_code)
+{
+	if (key_code == M)
+	{
+		if (fractal->max_iter > 42)
+			fractal->max_iter -= 42;
+	}
+	else if (key_code == P)
+	{
+		if (fractal->max_iter < 4200)
+			fractal->max_iter += 42;
+	}
+}
+
+double	generate_random_c(void)
+{
+	return (((double)rand() / RAND_MAX) * 3.0 - 1.5);
+}
+
+void	put_color_to_pixel(t_fractal *fractal, int x, int y, int color)
+{
+	int	*buffer;
+
+	buffer = fractal->ptr_img;
+	buffer[(y * fractal->size_line / 4) + x] = color;
+}
+
+int	exit_fractal(t_fractal *fractal)
 {
 	mlx_destroy_image(fractal->mlx, fractal->image);
 	mlx_destroy_window(fractal->mlx, fractal->window);
 	free(fractal->mlx);
 	free(fractal);
 	exit(1);
-	return (0);
 }

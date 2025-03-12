@@ -1,4 +1,4 @@
-NAME 				= 			fract-ol
+NAME 				= 			fractol
 
 LIBFT				=			includes/libft/libft.a
 
@@ -8,51 +8,57 @@ OBJ_DIR				=			obj/
 
 CC					=			cc
 
-CFLAGS				=		-Wall -Werror -MMD -MP -g3
+CFLAGS				=			-Wall -Werror -MMD -MP -g3
 
 SRCS				=			$(addprefix $(SRCS_DIR), $(SRC_ACC))
 
 SRCS_DIR			=			srcs/
 
-MAIN_SRCS			=			main
+MAIN_SRCS			=			main \
+								events \
+								init \
+								julia \
+								mandelbrot \
+								utils \
+								burningship
 
 SRC_ACC				+=			$(addsuffix .c, $(MAIN_SRCS))
 
 
-OBJ			=			$(patsubst $(SRCS_DIR)%.c,$(OBJ_DIR)%.o,$(SRCS))
+OBJ			=					$(patsubst $(SRCS_DIR)%.c,$(OBJ_DIR)%.o,$(SRCS))
 
-DEP			=			$(patsubst $(SRCS_DIR)%.c,$(OBJ_DIR)%.d,$(SRCS))
+DEP			=					$(patsubst $(SRCS_DIR)%.c,$(OBJ_DIR)%.d,$(SRCS))
 
-MLX			:=	libmlx.a
+MLX			:=					libmlx.a
 
-MLX_D		:=	includes/minilibx-linux/
+MLX_D		:=					includes/minilibx-linux/
 
-MLX_F		:=	-L$(MLX_D) -lmlx -lXext -lX11 -lm -lz
+MLX_F		:=					-L$(MLX_D) -lmlx -lXext -lX11 -lm -lz
 
-MLX_H		:=	$(MLX_D)mlx.h
+MLX_H		:=					$(MLX_D)mlx.h
 
-MLX_A		:=	$(addprefix $(MLX_D), $(MLX))
+MLX_A		:=					$(addprefix $(MLX_D), $(MLX))
 
-all:					$(NAME)
+all:							$(NAME)
 
 $(NAME):				$(OBJ) $(LIBFT) $(MLX)
 							$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX_F) -o $@
 
-$(OBJ_DIR)%.o: $(SRCS_DIR)%.c Makefile
-						@mkdir -p $(dir $@)
-						$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)%.o:			$(SRCS_DIR)%.c Makefile
+							@mkdir -p $(dir $@)
+							$(CC) $(CFLAGS) -c $< -o $@
 
-$(MLX): FORCE
-	@$(MAKE) -C $(MLX_D)
+$(MLX):					FORCE
+							@$(MAKE) -C $(MLX_D)
 
-$(LIBFT): FORCE
-	$(MAKE) -C includes/libft
+$(LIBFT):				FORCE
+							$(MAKE) -C includes/libft
 
 clean:
-						make clean -C includes/libft
-						@rm -rf $(OBJ_DIR)
-						@rm -rf $(MLX_D)obj
-						@echo "Deleting $(OBJ_DIR)"
+							make clean -C includes/libft
+							@rm -rf $(OBJ_DIR)
+							@rm -rf $(MLX_D)obj
+							@echo "Deleting $(OBJ_DIR)"
 
 
 fclean:					clean
@@ -63,7 +69,7 @@ fclean:					clean
 
 
 re: 					fclean
-						$(MAKE) all
+							$(MAKE) all
 
 FORCE:
 

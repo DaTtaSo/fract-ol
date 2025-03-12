@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fract-ol.h"
+#include "../includes/fractol.h"
 
 void	init_fractal(t_fractal *fractal)
 {
@@ -23,13 +23,13 @@ void	init_fractal(t_fractal *fractal)
 	fractal->max_iter = 42;
 }
 
-void init_mlx(t_fractal *fractal)
+void	init_mlx(t_fractal *fractal)
 {
 	fractal->mlx = mlx_init();
 	fractal->window = mlx_new_window(fractal->mlx, SIZE, SIZE, "Fract-ol");
 	fractal->image = mlx_new_image(fractal->mlx, SIZE, SIZE);
-	fractal->ptr_img = mlx_get_data_addr(fractal->image,
-										 &fractal->bit_per_pixel,
-										 &fractal->size_line
-										 &fractal->endian);
+	fractal->ptr_img = mlx_get_data_addr(fractal->image, \
+											&fractal->bit_per_pixel, \
+											&fractal->size_line, \
+											&fractal->endian);
 }
