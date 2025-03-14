@@ -46,8 +46,11 @@ int	exit_fractal(t_fractal *fractal)
 	if (fractal->window)
 		mlx_destroy_window(fractal->mlx, fractal->window);
 	if (fractal->mlx)
+	{
+		mlx_loop_end(fractal->mlx);
 		mlx_destroy_display(fractal->mlx);
-	free(fractal->mlx);
+		free(fractal->mlx);
+	}
 	free(fractal);
 	exit(0);
 }
