@@ -19,17 +19,17 @@
 # include <pthread.h>
 
 # define SIZE 1000
-# define ESC 53
-# define LEFT 123
-# define RIGHT 124
-# define DOWN 125
-# define UP 126
-# define R 15
-# define C 8
-# define H 4
-# define J 38
-# define P 35
-# define M 46
+# define ESC 65307
+# define LEFT 65361
+# define RIGHT 65363
+# define DOWN 65364
+# define UP 65362
+# define R 114
+# define C 99
+# define H 104
+# define J 106
+# define P 112
+# define M 109
 # define SCROLL_UP 4
 # define SCROLL_DOWN 5
 

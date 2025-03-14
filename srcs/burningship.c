@@ -14,17 +14,16 @@
 
 void	draw_burningship(t_fractal *fractal)
 {
-	fractal->x = 0;
 	fractal->y = 0;
-	while (fractal->x < SIZE)
+	while (fractal->y < SIZE)
 	{
-		while (fractal->y < SIZE)
+		fractal->x = 0;
+		while (fractal->x < SIZE)
 		{
 			calculate_burningship(fractal);
-			fractal->y++;
+			fractal->x++;
 		}
-		fractal->x++;
-		fractal->y = 0;
+		fractal->y++;
 	}
 }
 

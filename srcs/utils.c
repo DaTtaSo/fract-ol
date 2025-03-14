@@ -41,9 +41,13 @@ void	put_color_to_pixel(t_fractal *fractal, int x, int y, int color)
 
 int	exit_fractal(t_fractal *fractal)
 {
-	mlx_destroy_image(fractal->mlx, fractal->image);
-	mlx_destroy_window(fractal->mlx, fractal->window);
+	if (fractal->image)
+		mlx_destroy_image(fractal->mlx, fractal->image);
+	if (fractal->window)
+		mlx_destroy_window(fractal->mlx, fractal->window);
+	if (fractal->mlx)
+		mlx_destroy_display(fractal->mlx);
 	free(fractal->mlx);
 	free(fractal);
-	exit(1);
+	exit(0);
 }

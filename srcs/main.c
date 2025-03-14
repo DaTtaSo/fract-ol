@@ -14,6 +14,8 @@
 
 int	draw_fractal(t_fractal *fractal, char *query)
 {
+	fractal->cx = 0.0;
+	fractal->cy = 0.0;
 	if (ft_strncmp(query, "mandelbrot", 11) == 0)
 		draw_mandelbrot(fractal);
 	else if (ft_strncmp(query, "julia", 6) == 0)
@@ -54,5 +56,6 @@ int	main(int argc, char **argv)
 	mlx_mouse_hook(fractal->window, mouse_hook, fractal);
 	draw_fractal(fractal, argv[1]);
 	mlx_loop(fractal->mlx);
+	exit_fractal(fractal);
 	return (0);
 }
