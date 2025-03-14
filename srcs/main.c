@@ -37,22 +37,67 @@ int	draw_fractal(t_fractal *fractal, char *query)
 	return (0);
 }
 
+int is_valid_number(char *str)
+{
+	int	i;
+	int	dec;
+
+	i = 0;
+	dec = 0;
+	if (str[i] == '-')
+		i++;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '.' && !dec)
+			dec = 1;
+		else if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+void	julia_call(t_fractal *fractal, char **argv)
+{
+	if (!is_valid_number(argv[2]) || !is_valid_number(argv[3]))
+	{
+		ft_putendl_fd("Invalid parameter: Please provide valid numbers", 1);
+		exit_fractal(fractal);
+	}
+	fractal->cx = ft_atof(argv[2]);
+	fractal->cy = ft_atof(argv[3]);
+	if (fractal->cx < -2.0 || fractal->cx > 2.0)
+	{
+		ft_putendl_fd("cx has to be in [-2.0;2.0] range", 1);
+		exit_fractal(fractal);
+	}
+	if (fractal->cy < -2.0 || fractal->cy > 2.0)
+	{
+		ft_putendl_fd("cy has to be in [-2.0;2.0] range", 1);
+		exit_fractal(fractal);
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_fractal	*fractal;
 
-	if (argc != 2)
+	if (argc != 2 && argc != 4)
 	{
 		ft_putendl_fd("try typing: ./fractol <fractal name>", 1);
 		ft_putendl_fd("Available fractals: mandelbrot, julia, burningship", 1);
 		return (0);
 	}
 	fractal = malloc(sizeof(t_fractal));
+	if (!fractal)
+		return (1);
 	init_fractal(fractal);
 	init_mlx(fractal);
 	mlx_hook(fractal->window, 17, 0, exit_fractal, fractal);
 	mlx_key_hook(fractal->window, key_hook, fractal);
 	mlx_mouse_hook(fractal->window, mouse_hook, fractal);
+	if (argc == 4)
+		julia_call(fractal, argv);
 	draw_fractal(fractal, argv[1]);
 	mlx_loop(fractal->mlx);
 	exit_fractal(fractal);

@@ -85,5 +85,6 @@ int		exit_fractal(t_fractal *fractal);
 void	put_color_to_pixel(t_fractal *fractal, int x, int y, int color);
 double	generate_random_c(void);
 void	change_max_iter(t_fractal *fractal, int key_code);
+double	ft_atof(char *str);
 
 #endif

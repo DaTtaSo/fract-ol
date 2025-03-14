@@ -54,3 +54,32 @@ int	exit_fractal(t_fractal *fractal)
 	free(fractal);
 	exit(0);
 }
+
+double	ft_atof(char *str)
+{
+	int		i;
+	int		neg;
+	double	nb;
+	double	div;
+
+	i = 0;
+	nb = 0.0;
+	div = 0.1;
+	neg = 1;
+	while (str[i] && ft_isdigit(str[i]))
+	{
+		nb = (nb * 10.0) + (str[i] - '0');
+		i++;
+	}
+	if (str[i] == '.')
+	{
+		i++;
+		while (str[i] && ft_isdigit(str[i]))
+		{
+			nb += (str[i] - '0') * div;
+			div *= 0.1;
+			i++;
+		}
+	}
+	return (nb * neg);
+}
