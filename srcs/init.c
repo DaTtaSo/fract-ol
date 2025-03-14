@@ -19,10 +19,10 @@ void	init_fractal(t_fractal *fractal)
 	fractal->cx = 0.;
 	fractal->cy = 0.;
 	fractal->color = 0xFCBE11;
-	fractal->zoom = 300;
-	fractal->offset_x = -1.21;
-	fractal->offset_y = -1.21;
-	fractal->max_iter = 42;
+	fractal->zoom = 500;
+	fractal->offset_x = -1.5;
+	fractal->offset_y = -1.5;
+	fractal->max_iter = 100;
 }
 
 void	init_mlx(t_fractal *fractal)

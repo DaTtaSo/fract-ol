@@ -20,8 +20,8 @@ int	draw_fractal(t_fractal *fractal, char *query)
 	{
 		if (!fractal->cx && !fractal->cy)
 		{
-			fractal->cx = -0.745429;
-			fractal->cy = 0.05;
+			fractal->cx = -0.54;
+			fractal->cy = 0.54;
 		}
 		draw_julia(fractal);
 	}

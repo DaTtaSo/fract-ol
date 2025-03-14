@@ -18,7 +18,7 @@
 # include <math.h>
 # include <pthread.h>
 
-# define SIZE 1000
+# define SIZE 1500
 # define ESC 65307
 # define LEFT 65361
 # define RIGHT 65363
