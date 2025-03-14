@@ -14,8 +14,10 @@
 
 void	init_fractal(t_fractal *fractal)
 {
-	fractal->x = 0;
-	fractal->y = 0;
+	fractal->x = 0.;
+	fractal->y = 0.;
+	fractal->cx = 0.;
+	fractal->cy = 0.;
 	fractal->color = 0xFCBE11;
 	fractal->zoom = 300;
 	fractal->offset_x = -1.21;

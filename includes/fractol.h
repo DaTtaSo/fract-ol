@@ -26,7 +26,6 @@
 # define UP 65362
 # define R 114
 # define C 99
-# define H 104
 # define J 106
 # define P 112
 # define M 109
