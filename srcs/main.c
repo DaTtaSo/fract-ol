@@ -37,7 +37,7 @@ int	draw_fractal(t_fractal *fractal, char *query)
 	return (0);
 }
 
-int is_valid_number(char *str)
+int	is_valid_number(char *str)
 {
 	int	i;
 	int	dec;
