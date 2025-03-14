@@ -17,12 +17,12 @@ void	change_max_iter(t_fractal *fractal, int key_code)
 	if (key_code == M)
 	{
 		if (fractal->max_iter > 100)
-			fractal->max_iter -= 50;
+			fractal->max_iter -= 100;
 	}
 	else if (key_code == P)
 	{
 		if (fractal->max_iter < 4200)
-			fractal->max_iter += 50;
+			fractal->max_iter += 100;
 	}
 }
 

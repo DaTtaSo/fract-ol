@@ -37,7 +37,7 @@ int	draw_fractal(t_fractal *fractal, char *query)
 	return (0);
 }
 
-int	is_valid_number(char *str)
+static int	is_valid_number(char *str)
 {
 	int	i;
 	int	dec;
@@ -57,7 +57,7 @@ int	is_valid_number(char *str)
 	return (1);
 }
 
-void	julia_call(t_fractal *fractal, char **argv)
+static void	julia_call(t_fractal *fractal, char **argv)
 {
 	if (!is_valid_number(argv[2]) || !is_valid_number(argv[3]))
 	{
