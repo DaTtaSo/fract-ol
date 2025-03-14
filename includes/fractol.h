@@ -64,7 +64,7 @@ void	init_fractal(t_fractal *fractal);
 void	init_mlx(t_fractal *fractal);
 
 /*mandelbrot.c*/
-void	*draw_mandelbrot(void *fractal_void);
+void	draw_mandelbrot(t_fractal *fractal);
 void	calculate_mandelbrot(t_fractal *fractal);
 
 /*julia.c*/
