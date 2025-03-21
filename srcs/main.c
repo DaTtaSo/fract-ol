@@ -82,10 +82,12 @@ int	main(int argc, char **argv)
 {
 	t_fractal	*fractal;
 
-	if (argc != 2 && argc != 4)
+	if ((argc != 2 && argc != 4) || (argv[1][0] != 'j' && argc == 4))
 	{
 		ft_putendl_fd("try typing: ./fractol <fractal name>", 1);
 		ft_putendl_fd("Available fractals: mandelbrot, julia, burningship", 1);
+		ft_putendl_fd("for julia, you may give two numbers between" \
+		" [-2.00;2.00]", 1);
 		return (0);
 	}
 	fractal = malloc(sizeof(t_fractal));
