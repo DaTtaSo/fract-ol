@@ -18,7 +18,7 @@
 # include <math.h>
 # include <pthread.h>
 
-# define SIZE 1500
+# define SIZE 700
 # define ESC 65307
 # define LEFT 65361
 # define RIGHT 65363
@@ -53,6 +53,7 @@ typedef struct s_fractal
 	double	zoom;
 	char	*name;
 	int		max_iter;
+	int		julia_b;
 }				t_fractal;
 
 /*main.c*/

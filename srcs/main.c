@@ -18,7 +18,7 @@ int	draw_fractal(t_fractal *fractal, char *query)
 		draw_mandelbrot(fractal);
 	else if (ft_strncmp(query, "julia", 6) == 0)
 	{
-		if (!fractal->cx && !fractal->cy)
+		if (!fractal->julia_b)
 		{
 			fractal->cx = -0.54;
 			fractal->cy = 0.54;
@@ -59,6 +59,7 @@ static int	is_valid_number(char *str)
 
 static void	julia_call(t_fractal *fractal, char **argv)
 {
+	fractal->julia_b = 1;
 	if (!is_valid_number(argv[2]) || !is_valid_number(argv[3]))
 	{
 		ft_putendl_fd("Invalid parameter: Please provide valid numbers", 1);
