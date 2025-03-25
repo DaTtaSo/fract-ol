@@ -16,7 +16,6 @@
 # include "libft/libft.h"
 # include "minilibx-linux/mlx.h"
 # include <math.h>
-# include <pthread.h>
 
 # define SIZE 700
 # define ESC 65307
