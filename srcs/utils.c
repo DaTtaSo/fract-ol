@@ -26,11 +26,6 @@ void	change_max_iter(t_fractal *fractal, int key_code)
 	}
 }
 
-double	generate_random_c(void)
-{
-	return (((double)rand() / RAND_MAX) * 3.0 - 1.5);
-}
-
 void	put_color_to_pixel(t_fractal *fractal, int x, int y, int color)
 {
 	int	*buffer;
@@ -55,6 +50,25 @@ int	exit_fractal(t_fractal *fractal)
 	exit(0);
 }
 
+static void	atof_loop(char *str, int *i, double *nb, double *div)
+{
+	while (str[*i] && ft_isdigit(str[*i]))
+	{
+		*nb = (*nb * 10.0) + (str[*i] - '0');
+		(*i)++;
+	}
+	if (str[*i] == '.')
+	{
+		(*i)++;
+		while (str[*i] && ft_isdigit(str[*i]))
+		{
+			*nb += (str[*i] - '0') * *div;
+			*div *= 0.1;
+			(*i)++;
+		}
+	}
+}
+
 double	ft_atof(char *str)
 {
 	int		i;
@@ -66,20 +80,14 @@ double	ft_atof(char *str)
 	nb = 0.0;
 	div = 0.1;
 	neg = 1;
-	while (str[i] && ft_isdigit(str[i]))
+	if (str[i] == '-' || str[i] == '+')
 	{
-		nb = (nb * 10.0) + (str[i] - '0');
-		i++;
-	}
-	if (str[i] == '.')
-	{
-		i++;
-		while (str[i] && ft_isdigit(str[i]))
+		if (str[i] == '-')
 		{
-			nb += (str[i] - '0') * div;
-			div *= 0.1;
+			neg = -1;
 			i++;
 		}
 	}
+	atof_loop(str, &i, &nb, &div);
 	return (nb * neg);
 }

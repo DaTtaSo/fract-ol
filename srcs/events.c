@@ -35,6 +35,11 @@ void	zoom(t_fractal *fractal, int x, int y, int zoom)
 	}
 }
 
+double	generate_random_c(void)
+{
+	return (((double)rand() / RAND_MAX) * 3.0 - 1.5);
+}
+
 void	set_random_julia(double *cx, double *cy)
 {
 	*cx = generate_random_c();
