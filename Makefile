@@ -41,17 +41,17 @@ MLX_A		:=					$(addprefix $(MLX_D), $(MLX))
 
 all:							$(NAME)
 
-$(NAME):				$(OBJ) $(LIBFT) $(MLX)
+$(NAME):				$(OBJ) $(LIBFT) $(MLX_A)
 							$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX_F) -o $@
 
 $(OBJ_DIR)%.o:			$(SRCS_DIR)%.c Makefile
 							@mkdir -p $(dir $@)
 							$(CC) $(CFLAGS) -c $< -o $@
 
-$(MLX):					FORCE
+$(MLX_A):
 							@$(MAKE) -C $(MLX_D)
 
-$(LIBFT):				FORCE
+$(LIBFT):
 							$(MAKE) -C includes/libft
 
 clean:
@@ -71,8 +71,6 @@ fclean:					clean
 re: 					fclean
 							$(MAKE) all
 
-FORCE:
-
-.PHONY: 				re all clean fclean FORCE
+.PHONY: 				re all clean fclean
 
 -include $(DEP)
